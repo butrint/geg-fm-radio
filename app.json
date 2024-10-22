@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "geg-fm-radio",
-    "slug": "geg-fm-radio",
+    "name": "gegfm",
+    "slug": "gegfm",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -12,16 +12,37 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.gegfmradio.gegfm",
+      "buildNumber": "1.0.0",
+      "icon": "./assets/geg-fm-mic.png",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "audio"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/geg-fm-mic.png",
         "backgroundColor": "#ffffff"
+      },
+      "package": "com.gegfmradio.gegfm",
+      "permissions": [],
+      "playStoreUrl": "",
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
+        }
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/geg-fm-mic.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "21240498-a8b6-4c1b-ba34-1a50c7b5bfb6"
+      }
     }
   }
 }
