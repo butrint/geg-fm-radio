@@ -13,6 +13,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.gegfmradio.gegfm",
+      "ascAppId": "6738689668",
       "buildNumber": "1.0.0",
       "icon": "./assets/geg-fm-mic.png",
       "supportsTablet": true,
