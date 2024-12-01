@@ -12,23 +12,25 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "bundleIdentifier": "com.gegfmradio.gegfm",
+      "bundleIdentifier": "com.gegfm",
       "ascAppId": "6738689668",
-      "buildNumber": "1.0.0",
+      "buildNumber": "3.0.0",
       "icon": "./assets/geg-fm-mic.png",
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": [
           "audio"
         ]
-      }
+      },
+      "usesApnsToken": false,
+      "jsEngine": "jsc"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/geg-fm-mic.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.gegfmradio.gegfm",
+      "package": "com.gegfm",
       "permissions": [],
       "playStoreUrl": "",
       "config": {

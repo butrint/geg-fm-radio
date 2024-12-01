@@ -19,7 +19,6 @@ const AudioPlayer = () => {
 
     const playPauseSound = async () => {
         try {
-            await Audio.requestPermissionsAsync();
             await Audio.setAudioModeAsync({
                 staysActiveInBackground: true,
                 interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
