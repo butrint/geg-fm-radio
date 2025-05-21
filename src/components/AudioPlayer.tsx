@@ -10,7 +10,6 @@ const AudioPlayer = () => {
 
     useEffect(() => {
         return () => {
-            // Unload sound when the component unmounts
             if (sound) {
                 sound.unloadAsync();
             }
@@ -28,7 +27,7 @@ const AudioPlayer = () => {
                 interruptionModeIOS: InterruptionModeIOS.DoNotMix,
                 playsInSilentModeIOS: true,
             });
-            if (sound === null) {
+            if (sound === null || sound === undefined) {
                 // Load and play the streaming audio from a URL
                 const { sound: newSound } = await Audio.Sound.createAsync(
                     { uri: 'https://carina.streamerr.co:8252/stream' },
@@ -58,7 +57,7 @@ const AudioPlayer = () => {
                     <TouchableOpacity style={styles.button} onPress={playPauseSound} >
                         <Ionicons
                             name={isPlaying ? 'pause' : 'play'}
-                            size={32}
+                            size={50}
                             color="#fff" // Icon color
                         />
                     </TouchableOpacity>
@@ -92,8 +91,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain', // 'cover' ensures the image covers the area entirely
     },
     button: {
-        width: 70, // Width of the button
-        height: 70, // Height of the button
+        width: 100, // Width of the button
+        height: 100, // Height of the button
         paddingTop: 20,
         backgroundColor: 'transparent', // Transparent background
         alignItems: 'center',
