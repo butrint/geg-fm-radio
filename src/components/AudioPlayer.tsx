@@ -31,7 +31,7 @@ const AudioPlayer = () => {
             if (sound === null) {
                 // Load and play the streaming audio from a URL
                 const { sound: newSound } = await Audio.Sound.createAsync(
-                    { uri: 'https://a7.asurahosting.com:6980/radio.mp3' },
+                    { uri: 'https://carina.streamerr.co:8252/stream' },
                     { shouldPlay: true } // Replace with your streaming URL
                 );
                 setSound(newSound);
@@ -71,7 +71,7 @@ const AudioPlayer = () => {
 const styles = StyleSheet.create({
     background: {
         flex: 1,
-        resizeMode: 'cover', // or 'contain' depending on your image
+        resizeMode: 'contain', // or 'contain' depending on your image
         width: '100%', // Ensure the background covers the entire width
         height: '100%', // Ensure the background covers the entire height
         justifyContent: 'center', // Center the child content (AudioPlayer)
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     image: {
-        resizeMode: 'cover', // 'cover' ensures the image covers the area entirely
+        resizeMode: 'contain', // 'cover' ensures the image covers the area entirely
     },
     button: {
         width: 70, // Width of the button

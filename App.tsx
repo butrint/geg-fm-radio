@@ -23,7 +23,7 @@ console.log("das")
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'rgb(14,17,36)'
+    backgroundColor: 'rgb(17 21 58)'
   },
   imageContainer: {
     flex: 1,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   image: {
     width: width * 0.9, // Image width is 90% of the screen width
     height: height * 0.5, // Image height is 50% of the screen height
-    maxWidth: 400, // Set a maximum width to prevent the image from getting too large on bigger screens
-    maxHeight: 400, // Set a maximum height
+    maxWidth: 300, // Set a maximum width to prevent the image from getting too large on bigger screens
+    maxHeight: 300, // Set a maximum height
   },
 });

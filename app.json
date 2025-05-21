@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "gegfm",
+    "name": "GEG FM Radio",
     "slug": "gegfm",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,7 +20,8 @@
       "infoPlist": {
         "UIBackgroundModes": [
           "audio"
-        ]
+        ],
+        "ITSAppUsesNonExemptEncryption": false
       },
       "usesApnsToken": false,
       "jsEngine": "jsc"
@@ -31,13 +32,60 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.gegfm",
-      "permissions": [],
+      "permissions": [
+        "FOREGROUND_SERVICE",
+        "WAKE_LOCK",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.WAKE_LOCK",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ],
       "playStoreUrl": "",
       "config": {
         "googleMaps": {
           "apiKey": "YOUR_GOOGLE_MAPS_API_KEY"
         }
+      },
+      "foregroundService": {
+        "notificationTitle": "GEG FM Radio",
+        "notificationBody": "Playing in background",
+        "notificationColor": "#FF0000",
+        "notificationIcon": "./assets/geg-fm-mic.png",
+        "notificationChannelId": "geg-fm-radio",
+        "notificationChannelName": "GEG FM Radio",
+        "notificationChannelDescription": "GEG FM Radio playback controls",
+        "notificationChannelImportance": "high",
+        "notificationChannelShowBadge": true,
+        "notificationChannelEnableVibration": false,
+        "notificationChannelEnableLights": true,
+        "notificationChannelLightColor": "#FF0000",
+        "notificationChannelLockscreenVisibility": "public",
+        "notificationChannelSound": "default",
+        "notificationChannelGroupId": "media_playback",
+        "notificationChannelGroupName": "Media Playback",
+        "notificationChannelGroupDescription": "Media playback controls",
+        "notificationActions": [
+          {
+            "id": "play_pause",
+            "title": "Play/Pause",
+            "icon": "play_pause"
+          },
+          {
+            "id": "stop",
+            "title": "Stop",
+            "icon": "stop"
+          }
+        ]
       }
+    },
+    "build": {
+      "development": {
+        "developmentClient": true,
+        "distribution": "internal"
+      },
+      "preview": {
+        "distribution": "internal"
+      },
+      "production": {}
     },
     "web": {
       "favicon": "./assets/geg-fm-mic.png"
@@ -46,6 +94,9 @@
       "eas": {
         "projectId": "21240498-a8b6-4c1b-ba34-1a50c7b5bfb6"
       }
-    }
+    },
+    "plugins": [
+      "expo-background-task"
+    ]
   }
 }
