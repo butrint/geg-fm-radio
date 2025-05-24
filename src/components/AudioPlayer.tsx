@@ -1,22 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { View, Button, Text, StyleSheet, ImageBackground, TouchableOpacity, Pressable } from 'react-native';
+import { View, Button, Text, StyleSheet, ImageBackground, TouchableOpacity, Pressable, AppState } from 'react-native';
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
 import { Sound } from 'expo-av/build/Audio';
 
 const AudioPlayer = () => {
     const [sound, setSound] = useState<Sound | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false)
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [appState, setAppState] = useState(AppState.currentState);
 
     useEffect(() => {
+        const subscription = AppState.addEventListener('change', nextAppState => {
+            setAppState(nextAppState);
+            if (nextAppState === 'active' && sound && isPlaying) {
+                // Ensure audio continues playing when app comes to foreground
+                sound.playAsync();
+            }
+        });
+
         return () => {
+            subscription.remove();
             if (sound) {
+                console.log("unloading sound")
                 sound.unloadAsync();
             }
         };
-    }, [sound]);
+    }, [sound, isPlaying]);
 
-    const playPauseSound = async () => {
+    const setupAudio = async () => {
         try {
             await Audio.setAudioModeAsync({
                 staysActiveInBackground: true,
@@ -27,26 +38,44 @@ const AudioPlayer = () => {
                 interruptionModeIOS: InterruptionModeIOS.DoNotMix,
                 playsInSilentModeIOS: true,
             });
+        } catch (e) {
+            console.error('Error setting up audio:', e);
+        }
+    };
+
+    const playPauseSound = async () => {
+        try {
+            await setupAudio();
+            
             if (sound === null || sound === undefined) {
                 // Load and play the streaming audio from a URL
                 const { sound: newSound } = await Audio.Sound.createAsync(
                     { uri: 'https://carina.streamerr.co:8252/stream' },
-                    { shouldPlay: true } // Replace with your streaming URL
+                    { 
+                        shouldPlay: true,
+                        progressUpdateIntervalMillis: 1000,
+                        positionMillis: 0,
+                        volume: 1.0,
+                        rate: 1.0,
+                        shouldCorrectPitch: true,
+                    }
                 );
                 setSound(newSound);
                 await newSound.playAsync();
                 setIsPlaying(true);
             } else {
                 if (isPlaying) {
+                    console.log("pausing sound")
                     await sound.pauseAsync();
                     setIsPlaying(false);
                 } else {
+                    console.log("playing sound")
                     await sound.playAsync();
                     setIsPlaying(true);
                 }
             }
         } catch (e) {
-            console.log(e);
+            console.error('Error in playPauseSound:', e);
         }
     };
 
